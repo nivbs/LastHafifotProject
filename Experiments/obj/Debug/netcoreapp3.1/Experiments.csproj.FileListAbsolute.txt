@@ -2,3 +2,16 @@ D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1
 D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.csprojAssemblyReference.cache
 D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.AssemblyInfoInputs.cache
 D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.AssemblyInfo.cs
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.csproj.CopyComplete
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.deps.json
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.runtimeconfig.json
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.runtimeconfig.dev.json
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\EasyNetQ.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.csproj.CoreCompileInputs.cache
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.genruntimeconfig.cache

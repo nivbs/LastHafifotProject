@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EasyNetQ": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "RabbitMQ.Client": {
               "target": "Package",
               "version": "[6.0.0, )"

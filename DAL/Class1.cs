@@ -12,7 +12,7 @@ namespace DAL
     {
     public void bla()
     {
-        MySqlConnection mySqlConnection = new MySqlConnection("Server=DESKTOP-5EV2I34;Database=hafifot;Uid=root;Pwd=root");
+        MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=hafifot;Uid=root;Pwd=root");
         mySqlConnection.Open();
         var command = mySqlConnection.CreateCommand();
         command.CommandType = System.Data.CommandType.Text;
