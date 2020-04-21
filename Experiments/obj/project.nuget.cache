@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "bEZ9ciKQpGkrB3VgnXogrJBSHmVHD5J2z3gVERDA8x9cuCsNSa35THncxFr8+M9DWsp01GQ5xO99aoSbl3Pf2Q==",
+  "success": true,
+  "projectFilePath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Experiments\\Experiments.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nivbs\\.nuget\\packages\\rabbitmq.client\\6.0.0\\rabbitmq.client.6.0.0.nupkg.sha512",
+    "C:\\Users\\nivbs\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}
