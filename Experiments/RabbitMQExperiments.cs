@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EasyNetQ;
 using RabbitMQ.Client;
 
 namespace Experiments
@@ -10,9 +9,14 @@ namespace Experiments
     {
         public void SendMessage ()
         {
-            using (var bus = RabbitHutch.CreateBus("host=localhost"))
+            ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost", Password = "guest", UserName = "guest"};
+            using (var connection = factory.CreateConnection())
             {
-                bus.Publish("AA19345,4557446145890236,2019-09-03,100.0");
+                using (var channel = connection.CreateModel())
+                {
+                    var body = Encoding.UTF8.GetBytes("AA19345,4557446145890236,2019-09-03,100.0");
+                    channel.BasicPublish("", "TEST", null, body);
+                }
             }
         }
     }

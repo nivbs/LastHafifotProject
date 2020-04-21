@@ -4,6 +4,37 @@
     "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Experiments\\Experiments.csproj": {}
   },
   "projects": {
+    "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj",
+        "projectName": "Core",
+        "projectPath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\DAL\\DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\DAL\\DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\DAL\\DAL.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj": {
+                "projectPath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Experiments\\Experiments.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -26,7 +57,14 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj": {
+                "projectPath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\Core\\Core.csproj"
+              },
+              "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\DAL\\DAL.csproj": {
+                "projectPath": "D:\\Hafifot\\LastProject\\NivLastHafifotProject\\DAL\\DAL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -41,6 +79,10 @@
             "EasyNetQ": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.19, )"
             },
             "RabbitMQ.Client": {
               "target": "Package",

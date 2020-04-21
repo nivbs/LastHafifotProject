@@ -1,5 +1,7 @@
 ﻿using System;
 using RabbitMQ.Client;
+using DAL;
+using Core;
 
 namespace Experiments
 {

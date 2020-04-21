@@ -1,0 +1,5 @@
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\Assertions.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\Assertions.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\obj\Debug\Assertions.csproj.CoreCompileInputs.cache
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\obj\Debug\Assertions.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\obj\Debug\Assertions.pdb

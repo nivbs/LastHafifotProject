@@ -7,7 +7,13 @@
 
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="4.0.3" />
+    <PackageReference Include="MySql.Data" Version="8.0.19" />
     <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
 </Project>

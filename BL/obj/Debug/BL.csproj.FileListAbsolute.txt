@@ -1,0 +1,6 @@
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\BL.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\BL.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\obj\Debug\BL.csprojAssemblyReference.cache
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\obj\Debug\BL.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\obj\Debug\BL.pdb

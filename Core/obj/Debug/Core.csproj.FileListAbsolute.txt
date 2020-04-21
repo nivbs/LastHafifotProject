@@ -1,0 +1,6 @@
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\bin\Debug\Core.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\bin\Debug\Core.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\obj\Debug\Core.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\obj\Debug\Core.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Core\obj\Debug\Core.csprojAssemblyReference.cache

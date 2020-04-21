@@ -37,5 +37,9 @@ namespace Core
             IsValid = isValid;
             WhyInvalid = whyInvalid;
         }
+
+        public ExpandPurchase()
+        {
+        }
     }
 }
