@@ -11,17 +11,28 @@ namespace BL
     public class DBPruchasesAccess
     {
         private ITalkWithDB TalkWithDB { get; set; }
-        
-        public DBPruchasesAccess(ITalkWithDB talkWithDB = null)
+
+        ////public DBPruchasesAccess(ITalkWithDB talkWithDB = null)
+        ////{
+        ////    if (talkWithDB == null)
+        ////    {
+        ////        TalkWithDB = new TalkWithMySQLDB();
+        ////    }
+        ////    else
+        ////    {
+        ////        TalkWithDB = talkWithDB;
+        ////    }
+        ////}
+
+        public DBPruchasesAccess()
+
         {
-            if (talkWithDB == null)
-            {
-                TalkWithDB = new TalkWithMySQLDB();
-            }
-            else
-            {
-                TalkWithDB = talkWithDB;
-            }
+            TalkWithDB = new TalkWithMySQLDB();
+        }
+
+        public DBPruchasesAccess(ITalkWithDB talkWithDB)
+        {
+            TalkWithDB = talkWithDB;
         }
 
         public IEnumerable<ExpandPurchase> GetPurchasesByCondition(string condition)
@@ -29,5 +40,17 @@ namespace BL
 
         public IEnumerable<ExpandPurchase> GetFirstProchasesByLimit(int count = 1000)
             => TalkWithDB.GetFirstPurchasesByLimit(count);
+
+        public IEnumerable<ExpandPurchase> GetProchasesByProchaseDetails(PurchaseInQueue purchaseInQueue)
+            => TalkWithDB.GetProchasesByPurchaseDetails(purchaseInQueue);
+
+        public void CleanDB()
+            => TalkWithDB.CleanDB();
+
+        public IEnumerable<ExpandPurchase> GetAllPruchases()
+            => TalkWithDB.GetAllPurchases();
+
+        public void InsertPurchase(ExpandPurchase purchase)
+            => TalkWithDB.InsertPurchaseToDB(purchase);
     }
 }

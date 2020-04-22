@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Extensions;
 
 namespace Core
 {
@@ -40,6 +41,22 @@ namespace Core
 
         public ExpandPurchase()
         {
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is ExpandPurchase)
+            {
+                ExpandPurchase purchase = (ExpandPurchase)obj;
+
+                return PurchaseId.IsEquals(purchase.PurchaseId) && StoreType.IsEquals(purchase.StoreType) && StoreId.IsEquals(purchase.StoreId) && ActivityDays.IsEquals(purchase.ActivityDays) &&
+                    CreditCard.IsEquals(purchase.CreditCard) && PurchaseDate.IsEquals(purchase.PurchaseDate) && InsertionDate.IsEquals(purchase.InsertionDate) && TotalPrice.IsEquals(purchase.TotalPrice) &&
+                    Installments.IsEquals(purchase.Installments) && PricePerInstallments.IsEquals(purchase.PricePerInstallments) && WhyInvalid.IsEquals(purchase.WhyInvalid) && IsValid == purchase.IsValid;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

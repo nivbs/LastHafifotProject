@@ -23,8 +23,12 @@ namespace Core
         public StoreID()
         {
             StoreType = StoreIdDictionary.Types.ToList()[Random.Next(StoreIdDictionary.Types.Count)].Key.ToString()[0];
-            ActivityDays = StoreIdDictionary.OpeningDays.ToList()[Random.Next(StoreIdDictionary.OpeningDays.Count)].Key.ToString()[0];
+            ActivityDays = StoreIdDictionary.ActivityDays.ToList()[Random.Next(StoreIdDictionary.ActivityDays.Count)].Key.ToString()[0];
             StoreIdNumbers = Random.Next(10000, 99999);
         }
+
+        public override string ToString()
+            => $"{StoreType}{ActivityDays}{StoreIdNumbers}";
+        
     }
 }

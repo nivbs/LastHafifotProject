@@ -13,7 +13,7 @@ namespace Extensions
         {
             ExpandPurchase expandPurchase = new ExpandPurchase();
 
-            expandPurchase.ActivityDays = StoreIdDictionary.OpeningDays[purchaseInQueue.StoreID.ActivityDays];
+            expandPurchase.ActivityDays = StoreIdDictionary.ActivityDays[purchaseInQueue.StoreID.ActivityDays];
             expandPurchase.CreditCard = purchaseInQueue.CreditCardNumber;
             expandPurchase.InsertionDate = DateTime.Now;
             int installments;
@@ -30,7 +30,7 @@ namespace Extensions
                 expandPurchase.Installments = -1;
             }
             expandPurchase.IsValid = true;
-            expandPurchase.TotalPrice = purchaseInQueue.Price;
+            expandPurchase.TotalPrice = purchaseInQueue.TotalPrice;
             expandPurchase.PricePerInstallments = expandPurchase.TotalPrice / expandPurchase.Installments;
             expandPurchase.PurchaseDate = purchaseInQueue.PurchaseDate;
             expandPurchase.PurchaseId = "";

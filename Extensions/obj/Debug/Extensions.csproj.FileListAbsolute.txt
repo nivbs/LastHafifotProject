@@ -4,3 +4,14 @@ D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.csp
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.csproj.CoreCompileInputs.cache
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.dll
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\BouncyCastle.Crypto.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Core.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Google.Protobuf.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\MySql.Data.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Renci.SshNet.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Ubiety.Dns.Core.dll
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Core.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Google.Protobuf.xml
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\MySql.Data.xml
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Renci.SshNet.xml
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.csproj.CopyComplete

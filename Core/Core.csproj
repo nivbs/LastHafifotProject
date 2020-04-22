@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpandPurchase.cs" />
+    <Compile Include="GenerateCreditCardNumber.cs" />
+    <Compile Include="IsEqualsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseInQueue.cs" />
     <Compile Include="StoreID.cs" />
