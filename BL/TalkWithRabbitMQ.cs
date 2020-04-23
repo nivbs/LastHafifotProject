@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Configurations;
 
 namespace BL
 {
@@ -15,7 +16,7 @@ namespace BL
         {
             if(factory == null)
             {
-                Factory = new ConnectionFactory() { HostName = "localhost", Password = "guest", UserName = "guest" };
+                Factory = new ConnectionFactory() { HostName = Configurations.MQHostName, Password = Configurations.MQPassowrd, UserName = Configurations.MQUserName};
             }
             else
             {
@@ -29,6 +30,7 @@ namespace BL
                 {
                     var body = Encoding.UTF8.GetBytes(message);
                     channel.BasicPublish("", "TEST", null, body);
+                    channel.WaitForConfirms(TimeSpan.FromSeconds(10));
                 }
         }
     }
