@@ -27,6 +27,13 @@ namespace Core
             StoreIdNumbers = Random.Next(10000, 99999);
         }
 
+        public StoreID(string storeId)
+        {
+            StoreType = storeId[0];
+            ActivityDays = storeId[1];
+            StoreIdNumbers = int.Parse(storeId.Remove(0, 2));
+        }
+
         public override string ToString()
             => $"{StoreType}{ActivityDays}{StoreIdNumbers}";
         

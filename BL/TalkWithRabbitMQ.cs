@@ -30,7 +30,6 @@ namespace BL
                 {
                     var body = Encoding.UTF8.GetBytes(message);
                     channel.BasicPublish("", "TEST", null, body);
-                    channel.WaitForConfirms(TimeSpan.FromSeconds(10));
                 }
         }
     }

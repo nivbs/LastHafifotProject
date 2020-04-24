@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Core;
 using BL;
 using FluentAssertions;
@@ -19,10 +18,11 @@ namespace Tests
         {
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
-            DBPruchasesAccess.GetAllPruchases()
-                .Count()
+            Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(1);
+
+            action
                 .Should()
-                .Be(1);
+                .NotThrow<TimeoutException>();
         }
 
         [TestMethod]
@@ -30,10 +30,12 @@ namespace Tests
         {
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
+
             PurchaseInQueue.GetExpandedPurchase()
                 .Equals(DBPruchasesAccess.GetAllPruchases().First())
                 .Should()
-                .BeTrue();    
+                .BeTrue();
         }
 
         [TestMethod]
@@ -43,8 +45,9 @@ namespace Tests
         public void SendPurchaseWithSpecialPriceSuccess(float price)
         {
             PurchaseInQueue.TotalPrice = price;
-
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
             DBPruchasesAccess.GetAllPruchases()
                 .Count()
@@ -58,18 +61,20 @@ namespace Tests
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
-            DBPruchasesAccess.GetAllPruchases()
-                .Count()
-                .Should()
-                .Be(2);
+            Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(2);
+
+            action.Should()
+                .NotThrow<TimeoutException>();
         }
 
         [TestMethod]
-        [DataRow("FULL")]
+        [DataRow(",FULL")]
         [DataRow("")]
         public void SendPurchaseWithSpecialInstallmentsSuccess(string installments)
         {
             TalkWithMQ.SendMessage($"{PurchaseInQueue.StoreID},{PurchaseInQueue.CreditCardNumber},{PurchaseInQueue.PurchaseDate.ToString("yyy-MM-dd")},{PurchaseInQueue.TotalPrice}{installments}");
+
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
             DBPruchasesAccess.GetAllPruchases()
                 .Count()
@@ -83,10 +88,11 @@ namespace Tests
             PurchaseInQueue purchaseInQueue = new PurchaseInQueue();
             TalkWithMQ.SendMessage($"{PurchaseInQueue}\n{purchaseInQueue}");
 
-            DBPruchasesAccess.GetAllPruchases()
-                .Count()
+            Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(2);
+
+            action
                 .Should()
-                .Be(2);
+                .NotThrow<TimeoutException>();
         }
     }
 }

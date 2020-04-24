@@ -14,7 +14,7 @@ namespace Tests
         protected PurchaseInQueue PurchaseInQueue { get; set; }
 
         [TestInitialize]
-        public virtual void Intitalize()
+        public virtual void Initialize()
         {
             PurchaseInQueue = new PurchaseInQueue();
         }

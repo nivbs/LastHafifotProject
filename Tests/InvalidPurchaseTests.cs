@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
+using Extensions;
 using Core;
 using FluentAssertions;
 
@@ -20,18 +21,14 @@ namespace Tests
         [DataRow("473849734")]
         [DataRow("2938472938493823")]
         [DataRow("dkfleoritorkfldf")]
+        [DataRow("39485849584950495834")]
         public void SendPurchaseWithIncorrectCreditCardNumberSuccess(string creditCardNumber)
         {
             PurchaseInQueue.CreditCardNumber = creditCardNumber;
-
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
-
+            
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
-
-            purchases
-                .Count()
-                .Should()
-                .Be(1);
 
             purchases.First()
                 .WhyInvalid
@@ -48,15 +45,10 @@ namespace Tests
         public void SendPurchaseWithTooMuchInstallmentsSuccess()
         {
             PurchaseInQueue.Installments = $"{PurchaseInQueue.TotalPrice * 10 + 1}";
-
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
-
-            purchases
-                .Count()
-                .Should()
-                .Be(1);
 
             purchases.First()
                 .WhyInvalid
@@ -73,15 +65,10 @@ namespace Tests
         public void SendPurchaseWithPricePerInstallmentBiggerThan5000Success()
         {
             PurchaseInQueue.TotalPrice = int.Parse(PurchaseInQueue.Installments) * 5001;
-
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
-
-            purchases
-                .Count()
-                .Should()
-                .Be(1);
 
             purchases.First()
                 .WhyInvalid
@@ -98,20 +85,15 @@ namespace Tests
         public void SendPurchaseWithFuturedPurchaseDateSuccess()
         {
             PurchaseInQueue.PurchaseDate = DateTime.Now + TimeSpan.FromDays(4);
-
             TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
 
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
-
-            purchases
-                .Count()
-                .Should()
-                .Be(1);
 
             purchases.First()
                 .WhyInvalid
                 .Should()
-                .NotBeNullOrEmpty();
+                .Be("The purchase date cant be in the future");
 
             purchases.First()
                 .IsValid
@@ -124,20 +106,15 @@ namespace Tests
         {
             PurchaseInQueue.CreditCardNumber = "0";
             PurchaseInQueue purchaseInQueue = new PurchaseInQueue();
-
             TalkWithMQ.SendMessage($"{purchaseInQueue}\n{purchaseInQueue}");
 
+            DBPruchasesAccess.WaitUntilRowsCountEquals(2);
             List<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases().ToList();
-
-            purchases
-                .Count()
-                .Should()
-                .Be(1);
 
             purchases.First()
                 .WhyInvalid
                 .Should()
-                .NotBeNullOrEmpty();
+                .Be("The credit card number is not valid");
 
             purchases.First()
                 .IsValid

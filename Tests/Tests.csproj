@@ -95,9 +95,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseOnePurchaseTests.cs" />
-    <Compile Include="BaseUnitTests.cs" />
+    <Compile Include="BaseUnitTests\BaseOnePurchaseTests.cs" />
+    <Compile Include="BaseUnitTests\BaseOnePurchaseTestsWithCheckPurchase.cs" />
+    <Compile Include="BaseUnitTests\BaseUnitTests.cs" />
     <Compile Include="CorrectPruchaseTests.cs" />
+    <Compile Include="IncorrectPruchaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InvalidPurchaseTests.cs" />
   </ItemGroup>
