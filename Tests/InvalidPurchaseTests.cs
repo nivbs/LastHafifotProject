@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assertions;
 using BL;
-using Extensions;
 using Core;
 using FluentAssertions;
 
@@ -15,8 +12,6 @@ namespace Tests
     [TestClass]
     public class InvalidPurchaseTests : BaseOnePurchaseTests
     {
-        //change the condition of WhyInvaild To Something more specific
-
         [TestMethod]
         [DataRow("0")]
         [DataRow("473849734")]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Core;
-using System.Threading.Tasks;
+﻿using Core;
 using FluentAssertions;
 
 namespace Assertions
@@ -17,11 +12,11 @@ namespace Assertions
         {
             assertions.Subject.IsValid
                 .Should()
-                .BeFalse();
+                .BeFalse("Purchase need to be invalid but found valid");
 
             assertions.Subject.WhyInvalid
                 .Should()
-                .Be(whyInvalid);
+                .Be(whyInvalid, $"The row WhyInvalid need to be '{whyInvalid}', but found '{assertions.Subject.WhyInvalid}'");
 
             return new AndConstraint<GenericObjectAssertions<ExpandPurchase>>(assertions);
         }

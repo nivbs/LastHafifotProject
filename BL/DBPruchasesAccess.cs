@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core;
 using DAL;
 
@@ -12,18 +10,6 @@ namespace BL
     {
         private ITalkWithDB TalkWithDB { get; set; }
 
-        ////public DBPruchasesAccess(ITalkWithDB talkWithDB = null)
-        ////{
-        ////    if (talkWithDB == null)
-        ////    {
-        ////        TalkWithDB = new TalkWithMySQLDB();
-        ////    }
-        ////    else
-        ////    {
-        ////        TalkWithDB = talkWithDB;
-        ////    }
-        ////}
-        
         public DBPruchasesAccess()
         {
             TalkWithDB = new TalkWithMySQLDB();
