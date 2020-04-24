@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assertions;
 using BL;
 using Extensions;
 using Core;
@@ -31,14 +32,8 @@ namespace Tests
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
 
             purchases.First()
-                .WhyInvalid
                 .Should()
-                .Be("The credit card number is not valid");
-
-            purchases.First()
-                .IsValid
-                .Should()
-                .BeFalse();
+                .BeInvalid("The credit card number is not valid");
         }
 
         [TestMethod]
@@ -71,14 +66,8 @@ namespace Tests
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
 
             purchases.First()
-                .WhyInvalid
                 .Should()
-                .Be("Price per installment cant be higher than 5000");
-
-            purchases.First()
-                .IsValid
-                .Should()
-                .BeFalse();
+                .BeInvalid("Price per installment cant be higher than 5000");
         }
 
         [TestMethod]
@@ -91,14 +80,23 @@ namespace Tests
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
 
             purchases.First()
-                .WhyInvalid
                 .Should()
-                .Be("The purchase date cant be in the future");
+                .BeInvalid("The purchase date cant be in the future");
+        }
+
+        [TestMethod]
+        public void SendPurchaseWithPurchaseDateWhenStoreClosedSuccess()
+        {
+            PurchaseInQueue.PurchaseDate = new DateTime(2020, 4, 18);
+            PurchaseInQueue.StoreID.ActivityDays = 'C';
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+
+            DBPruchasesAccess.WaitUntilRowsCountEquals(1);
+            IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
 
             purchases.First()
-                .IsValid
                 .Should()
-                .BeFalse();
+                .BeInvalid("Purchase was made on a day that the store is closed");
         }
 
         [TestMethod]
@@ -112,14 +110,8 @@ namespace Tests
             List<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases().ToList();
 
             purchases.First()
-                .WhyInvalid
                 .Should()
-                .Be("The credit card number is not valid");
-
-            purchases.First()
-                .IsValid
-                .Should()
-                .BeFalse();
+                .BeInvalid("The credit card number is not valid");
 
             purchases[1].WhyInvalid
                 .Should()

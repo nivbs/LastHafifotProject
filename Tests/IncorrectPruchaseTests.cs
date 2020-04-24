@@ -118,5 +118,31 @@ namespace Tests
                 .Should()
                 .Be(1);
         }
+
+        [TestMethod]
+        public void SendPurchasesWhenSomeOfThemIncorrectFormatSuccess()
+        {
+            TalkWithMQ.SendMessage("4557446145890236,AA12345,100.0,5,2019-09-03");
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+
+            Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(1);
+
+            action.Should()
+                .NotThrow<TimeoutException>();
+        }
+
+        [TestMethod]
+        public void SendCorrectPurchasesNotInCSVFormatFailed()
+        {
+            TalkWithMQ.SendMessage($"{PurchaseInQueue} ; {new PurchaseInQueue()}");
+            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+
+            DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
+
+            DBPruchasesAccess.GetAllPruchases()
+                .Count()
+                .Should()
+                .Be(1);
+        }
     }
 }
