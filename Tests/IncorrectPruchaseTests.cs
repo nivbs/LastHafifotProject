@@ -17,8 +17,8 @@ namespace Tests
         public void SendPruchaseWithInstallmentsFailed(string installments)
         {
             PurchaseInQueue.Installments = installments;
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -35,7 +35,7 @@ namespace Tests
         {
             TalkWithMQ.SendMessage($"{PurchaseInQueue.StoreID},{PurchaseInQueue.CreditCardNumber},{purchaseDate},{PurchaseInQueue.TotalPrice}" +
                 $",{PurchaseInQueue.Installments}");
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -50,10 +50,10 @@ namespace Tests
         [DataRow("AW20394")]
         public void SendPurchaseWithUnknownStoreIdCharsFailed(string storeId)
         {
-            PurchaseInQueue.StoreID = new StoreID(storeId);
+            PurchaseInQueue.StoreID = new Store(storeId);
 
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -72,7 +72,7 @@ namespace Tests
         {
             TalkWithMQ.SendMessage($"{storeId},{PurchaseInQueue.CreditCardNumber},{PurchaseInQueue.PurchaseDate},{PurchaseInQueue.TotalPrice}" +
                 $",{PurchaseInQueue.Installments}");
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -87,8 +87,8 @@ namespace Tests
         {
             PurchaseInQueue.TotalPrice *= -1;
 
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -106,7 +106,7 @@ namespace Tests
         public void SendPruchaseWithIncorrectFormatFailed(string purchaseInQueue)
         {
             TalkWithMQ.SendMessage(purchaseInQueue);
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 
@@ -120,7 +120,7 @@ namespace Tests
         public void SendPurchasesWhenSomeOfThemIncorrectFormatSuccess()
         {
             TalkWithMQ.SendMessage("4557446145890236,AA12345,100.0,5,2019-09-03");
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
@@ -132,7 +132,7 @@ namespace Tests
         public void SendCorrectPurchasesNotInCSVFormatFailed()
         {
             TalkWithMQ.SendMessage($"{PurchaseInQueue} ; {new PurchaseInQueue()}");
-            TalkWithMQ.SendMessage(CheckPurchase.ToString());
+            TalkWithMQ.SendMessage(CheckPurchase.ToCSVString());
 
             DBPruchasesAccess.WaitUntilConditionReturnRows($"credit_card = '{CheckPurchase.CreditCardNumber}'");
 

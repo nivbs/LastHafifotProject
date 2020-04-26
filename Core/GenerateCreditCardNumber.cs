@@ -6,10 +6,10 @@ namespace Core
 {
     public static class GenerateCreditCardNumber
     {
+        private static Random Random = new Random();
         private static string[] MASTERCARD_PREFIX_LIST = new[] { "51","52", "53", "54", "55" };
 
-        // the default is  mastercard number
-        public static string GetDefaultFakeCCNumber()
+        public static string GetRandomMasterCardFakeCCNumber()
             => CreateFakeCCNumber(MASTERCARD_PREFIX_LIST[new Random().Next(MASTERCARD_PREFIX_LIST.Length)], 16);
 
         private static string CreateFakeCCNumber(string prefix, int length)
@@ -18,13 +18,10 @@ namespace Core
 
             while (ccnumber.Length < (length - 1))
             {
-                double rnd = (new Random().NextDouble() * 1.0f - 0f);
+                double rnd = (Random.NextDouble() * 1.0f - 0f);
 
                 ccnumber += Math.Floor(rnd * 10);
 
-                //sleep so we get a different seed
-
-                Thread.Sleep(2);
             }
 
 

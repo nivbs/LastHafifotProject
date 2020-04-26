@@ -5,7 +5,7 @@ namespace DAL
 {
     public static class DBConnection
     {
-        public static MySqlConnection MySqlConnection = new MySqlConnection($"Server={Configurations.DBServer};Database={Configurations.Database}" +
-            $";Uid={Configurations.DBUserName};Pwd={Configurations.DBPassword}");
+        public static MySqlConnection GetMySqlConnection(string server, string dataBase, string dbUserName, string dbPassword)
+            => new MySqlConnection($"Server={server};Database={dataBase};Uid={dbUserName};Pwd={dbPassword}");
     }
 }

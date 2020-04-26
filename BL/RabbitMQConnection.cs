@@ -4,20 +4,13 @@ using Core.Configurations;
 
 namespace BL
 {
-    public class TalkWithRabbitMQ : ITalkWithMQ
+    public class RabbitMQConnection : ITalkWithMQ
     {
         protected ConnectionFactory Factory { get; set; }
 
-        public TalkWithRabbitMQ(ConnectionFactory factory = null)
+        public RabbitMQConnection(ConnectionFactory factory = null)
         {
-            if(factory == null)
-            {
-                Factory = new ConnectionFactory() { HostName = Configurations.MQHostName, Password = Configurations.MQPassowrd, UserName = Configurations.MQUserName};
-            }
-            else
-            {
-                Factory = factory;
-            }
+            Factory = factory ?? (new ConnectionFactory() { HostName = Configurations.MQHostName, Password = Configurations.MQPassowrd, UserName = Configurations.MQUserName });
         }
 
         public void SendMessage(string message)

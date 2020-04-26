@@ -1,21 +1,35 @@
 ﻿using Core;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using Core.Configurations;
 
 namespace DAL
 {
     public class TalkWithMySQLDB : ITalkWithDB
     { 
+        public MySqlConnection MySqlConnection { get; set; }
+
+        public TalkWithMySQLDB()
+        {
+            MySqlConnection = DBConnection.GetMySqlConnection(Configurations.DBServer, Configurations.Database, Configurations.DBUserName, Configurations.DBPassword);
+        }
+
+        private MySqlCommand GetCommand(string query)
+        {
+            var command = MySqlConnection.CreateCommand();
+            command.CommandType = System.Data.CommandType.Text;
+            command.CommandText = query;
+            
+            return command;
+        }
+
         public IEnumerable<ExpandPurchase> GetPurchasesByCondition(string condition)
         {
             try
             {
                 List<ExpandPurchase> purchases = new List<ExpandPurchase>();
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"SELECT * FROM hafifot.purchases WHERE {condition}";
-                MySqlDataReader mySqlDataReader = command.ExecuteReader();
+                MySqlConnection.Open();
+                MySqlDataReader mySqlDataReader = GetCommand(Queries.GetPurchasesByCondition(condition)).ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
                     purchases.Add(mySqlDataReader.GetExpandPurchaseFromRow());
@@ -24,7 +38,7 @@ namespace DAL
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
 
@@ -33,11 +47,8 @@ namespace DAL
             try
             {
                 List<ExpandPurchase> purchases = new List<ExpandPurchase>();
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"SELECT * FROM hafifot.purchases LIMIT 0,{count}";
-                MySqlDataReader mySqlDataReader = command.ExecuteReader();
+                MySqlConnection.Open();
+                MySqlDataReader mySqlDataReader = GetCommand(Queries.GetPurchasesByLimit(count)).ExecuteReader();
             while (mySqlDataReader.Read())
             {
                 purchases.Add(mySqlDataReader.GetExpandPurchaseFromRow());
@@ -46,7 +57,7 @@ namespace DAL
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
 
@@ -55,11 +66,8 @@ namespace DAL
             try
             {
                 List<ExpandPurchase> purchases = new List<ExpandPurchase>();
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"SELECT * FROM hafifot.purchases";
-                MySqlDataReader mySqlDataReader = command.ExecuteReader();
+                MySqlConnection.Open();
+                MySqlDataReader mySqlDataReader = GetCommand(Queries.GetAllPurchases).ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
                     purchases.Add(mySqlDataReader.GetExpandPurchaseFromRow());
@@ -68,98 +76,20 @@ namespace DAL
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
 
         public IEnumerable<ExpandPurchase> GetProchasesByPurchaseDetails(PurchaseInQueue purchaseInQueue)
-        {
-            string whereQuery = "";
-            bool isNeedAnd = false;
-            if(!string.IsNullOrEmpty(purchaseInQueue.CreditCardNumber))
-            {
-                whereQuery += $"credit_card = '{purchaseInQueue.CreditCardNumber}'";
-                isNeedAnd = true;
-            }
-            if(!string.IsNullOrEmpty(purchaseInQueue.Installments))
-            {
-                if (isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-                
-                if (purchaseInQueue.Installments == "FULL")
-                {
-                    whereQuery += "installments = 1";
-                }
-                else
-                {
-                    whereQuery += $"installments = {purchaseInQueue.Installments}";
-                }
-                isNeedAnd = true;
-            }
-            if (purchaseInQueue.TotalPrice != 0)
-            {
-                if (isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-
-                whereQuery += $"total_price = '{purchaseInQueue.TotalPrice}'";
-                isNeedAnd = true;
-            }
-            if(purchaseInQueue.PurchaseDate != null)
-            {
-                if(isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-
-                whereQuery += $"purchase_date = '{purchaseInQueue.PurchaseDate.ToString("yyy-MM-dd")}'";
-                isNeedAnd = true;
-            }
-            if(!char.IsWhiteSpace(purchaseInQueue.StoreID.ActivityDays))
-            {
-                if(isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-
-                whereQuery += $"activity_days = '{StoreIdDictionary.ActivityDays[purchaseInQueue.StoreID.ActivityDays]}'";
-                isNeedAnd = true;
-            }
-            if (!char.IsWhiteSpace(purchaseInQueue.StoreID.StoreType))
-            {
-                if (isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-
-                whereQuery += $"store_type = '{StoreIdDictionary.Types[purchaseInQueue.StoreID.StoreType]}'";
-                isNeedAnd = true;
-            }
-            if (purchaseInQueue.StoreID.StoreIdNumbers != 0)
-            {
-                if (isNeedAnd)
-                {
-                    whereQuery += " AND ";
-                }
-
-                whereQuery += $"store_id = '{purchaseInQueue.StoreID.StoreIdNumbers}'";
-            }
-
-            return GetPurchasesByCondition(whereQuery);
-        }
+            => GetPurchasesByCondition(Queries.GetPurchaseByPurchaseDetails(purchaseInQueue));
+        
 
         public ExpandPurchase GetLastInsertPurchase()
         {
             try
             {
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"SELECT * FROM hafifot.purchases ORDER BY insertion_date DESC";
-                MySqlDataReader mySqlDataReader = command.ExecuteReader();
+                MySqlConnection.Open();
+                MySqlDataReader mySqlDataReader = GetCommand(Queries.GetAllPurchasesByOrderInsertionDate).ExecuteReader();
                 if(mySqlDataReader.Read())
                 {
                     return mySqlDataReader.GetExpandPurchaseFromRow();
@@ -169,7 +99,7 @@ namespace DAL
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
 
@@ -177,15 +107,12 @@ namespace DAL
         {
             try
             {
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"DELETE FROM hafifot.purchases";
-                command.ExecuteNonQuery();
+                MySqlConnection.Open();
+                GetCommand(Queries.DeleteAllPurchases).ExecuteNonQuery();
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
 
@@ -193,26 +120,12 @@ namespace DAL
         {
             try
             {
-                DBConnection.MySqlConnection.Open();
-                var command = DBConnection.MySqlConnection.CreateCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                string isValid;
-                if(expandPurchase.IsValid)
-                {
-                    isValid = "1";
-                }
-                else
-                {
-                    isValid = "0";
-                }
-                command.CommandText = $"INSERT hafifot.purchases VALUES('{expandPurchase.PurchaseId}', '{expandPurchase.StoreType}', '{expandPurchase.StoreId}', '{expandPurchase.ActivityDays}'" +
-                    $", '{expandPurchase.CreditCard}', '{expandPurchase.PurchaseDate.ToString("yyy-MM-dd")}', '{expandPurchase.InsertionDate.ToString("yyy-MM-dd")}', {expandPurchase.TotalPrice}," +
-                    $"{expandPurchase.Installments}, {expandPurchase.PricePerInstallments}, {isValid}, {expandPurchase.WhyInvalid})";
-                command.ExecuteNonQuery();
+                MySqlConnection.Open();
+                GetCommand(Queries.InsertPurchase(expandPurchase)).ExecuteNonQuery();
             }
             finally
             {
-                DBConnection.MySqlConnection.Close();
+                MySqlConnection.Close();
             }
         }
     }

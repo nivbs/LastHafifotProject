@@ -14,7 +14,7 @@ namespace Tests
         [TestMethod]
         public void SendOneCorrectPurchaseSuccess()
         {
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
@@ -26,12 +26,12 @@ namespace Tests
         [TestMethod]
         public void SendOneCorrectPurchaseWillParseSuccessfully()
         {
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
             PurchaseInQueue.GetExpandedPurchase()
-                .Equals(DBPruchasesAccess.GetAllPruchases().First())
+                .DeepEquals(DBPruchasesAccess.GetAllPruchases().First())
                 .Should()
                 .BeTrue();
         }
@@ -43,7 +43,7 @@ namespace Tests
         public void SendPurchaseWithSpecialPriceSuccess(float price)
         {
             PurchaseInQueue.TotalPrice = price;
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
 
@@ -56,8 +56,8 @@ namespace Tests
         [TestMethod]
         public void SendExistPurchaseSuccess()
         {
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             Action action = () => DBPruchasesAccess.WaitUntilRowsCountEquals(2);
 

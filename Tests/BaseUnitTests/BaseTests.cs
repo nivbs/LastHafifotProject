@@ -6,7 +6,7 @@ namespace Tests
     [TestClass]
     public abstract class BaseUnitTests
     {
-        protected static ITalkWithMQ TalkWithMQ = new TalkWithRabbitMQ();
+        protected static ITalkWithMQ TalkWithMQ = new RabbitMQConnection();
         protected static DBPruchasesAccess DBPruchasesAccess = new DBPruchasesAccess();
 
         [TestCleanup]

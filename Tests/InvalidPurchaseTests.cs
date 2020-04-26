@@ -21,7 +21,7 @@ namespace Tests
         public void SendPurchaseWithIncorrectCreditCardNumberSuccess(string creditCardNumber)
         {
             PurchaseInQueue.CreditCardNumber = creditCardNumber;
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
             
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
@@ -35,7 +35,7 @@ namespace Tests
         public void SendPurchaseWithTooMuchInstallmentsSuccess()
         {
             PurchaseInQueue.Installments = $"{PurchaseInQueue.TotalPrice * 10 + 1}";
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
@@ -55,7 +55,7 @@ namespace Tests
         public void SendPurchaseWithPricePerInstallmentBiggerThan5000Success()
         {
             PurchaseInQueue.TotalPrice = int.Parse(PurchaseInQueue.Installments) * 5001;
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
@@ -69,7 +69,7 @@ namespace Tests
         public void SendPurchaseWithFuturedPurchaseDateSuccess()
         {
             PurchaseInQueue.PurchaseDate = DateTime.Now + TimeSpan.FromDays(4);
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
@@ -84,7 +84,7 @@ namespace Tests
         {
             PurchaseInQueue.PurchaseDate = new DateTime(2020, 4, 18);
             PurchaseInQueue.StoreID.ActivityDays = 'C';
-            TalkWithMQ.SendMessage(PurchaseInQueue.ToString());
+            TalkWithMQ.SendMessage(PurchaseInQueue.ToCSVString());
 
             DBPruchasesAccess.WaitUntilRowsCountEquals(1);
             IEnumerable<ExpandPurchase> purchases = DBPruchasesAccess.GetAllPruchases();
