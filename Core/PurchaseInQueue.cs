@@ -30,6 +30,6 @@ namespace Core
         }
 
         public string ToCSVString()
-            => $"{StoreID},{CreditCardNumber},{PurchaseDate.ToString("yyy-MM-dd")},{TotalPrice},{Installments}";
+            => $"{StoreID.ToCSVString()},{CreditCardNumber},{PurchaseDate.ToString("yyy-MM-dd")},{TotalPrice},{Installments}";
     }
 }

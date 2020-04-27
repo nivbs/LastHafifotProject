@@ -9,8 +9,9 @@ namespace Tests
         protected PurchaseInQueue PurchaseInQueue { get; set; }
 
         [TestInitialize]
-        public virtual void Initialize()
+        public override void Initialize()
         {
+            base.Initialize();
             PurchaseInQueue = new PurchaseInQueue();
         }
     }
