@@ -45,3 +45,4 @@ D:\Hafifot\LastProject\NivLastHafifotProject\Tests\bin\Debug\System.Numerics.Vec
 D:\Hafifot\LastProject\NivLastHafifotProject\Tests\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\Tests\bin\Debug\DAL.pdb
 D:\Hafifot\LastProject\NivLastHafifotProject\Tests\bin\Debug\Tests.dll.config
+D:\Hafifot\LastProject\NivLastHafifotProject\Tests\bin\Debug\CreditCardValidator.dll

@@ -15,3 +15,4 @@ D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Google.Protobu
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\MySql.Data.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\Renci.SshNet.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\obj\Debug\Extensions.csproj.CopyComplete
+D:\Hafifot\LastProject\NivLastHafifotProject\Extensions\bin\Debug\CreditCardValidator.dll

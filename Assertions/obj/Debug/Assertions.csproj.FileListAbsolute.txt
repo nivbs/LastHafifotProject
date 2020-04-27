@@ -10,3 +10,4 @@ D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\Core.pdb
 D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\FluentAssertions.pdb
 D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\FluentAssertions.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\obj\Debug\Assertions.csproj.CopyComplete
+D:\Hafifot\LastProject\NivLastHafifotProject\Assertions\bin\Debug\CreditCardValidator.dll

@@ -28,3 +28,4 @@ D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\MySql.Data.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\Google.Protobuf.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\Renci.SshNet.xml
 D:\Hafifot\LastProject\NivLastHafifotProject\BL\obj\Debug\BL.csproj.CopyComplete
+D:\Hafifot\LastProject\NivLastHafifotProject\BL\bin\Debug\CreditCardValidator.dll

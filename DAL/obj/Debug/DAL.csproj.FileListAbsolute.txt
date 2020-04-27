@@ -25,3 +25,4 @@ D:\Hafifot\LastProject\NivLastHafifotProject\DAL\obj\Debug\DAL.csproj.CoreCompil
 D:\Hafifot\LastProject\NivLastHafifotProject\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Hafifot\LastProject\NivLastHafifotProject\DAL\obj\Debug\DAL.dll
 D:\Hafifot\LastProject\NivLastHafifotProject\DAL\obj\Debug\DAL.pdb
+D:\Hafifot\LastProject\NivLastHafifotProject\DAL\bin\Debug\CreditCardValidator.dll
