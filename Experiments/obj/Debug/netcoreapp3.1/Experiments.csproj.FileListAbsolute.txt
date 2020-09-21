@@ -1,4 +1,0 @@
-D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\bin\Debug\netcoreapp3.1\Experiments.exe
-D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.csprojAssemblyReference.cache
-D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.AssemblyInfoInputs.cache
-D:\Hafifot\LastProject\NivLastHafifotProject\Experiments\obj\Debug\netcoreapp3.1\Experiments.AssemblyInfo.cs

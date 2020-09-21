@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Core
 {
@@ -18,7 +14,7 @@ namespace Core
             { 'F', "Other" }
         };
 
-        public static Dictionary<char, string> OpeningDays = new Dictionary<char, string>
+        public static Dictionary<char, string> ActivityDays = new Dictionary<char, string>
         {
             { 'A', "All week" },
             { 'B', "Sunday - Friday" },
